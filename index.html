@@ -7,98 +7,38 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-    <link
-      rel="stylesheet"
-      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-      integrity="sha256-p4NxAoJBhIINfQk+nGq+T7I6QpRkYHewp4wM6iH0r6w="
-      crossorigin=""
-    />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIINfQk+nGq+T7I6QpRkYHewp4wM6iH0r6w=" crossorigin="" />
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
     <div class="page">
       <main class="app-shell">
         <header class="topbar">
-          <div class="brand">
+          <a class="brand" href="#atlas" aria-label="Roundabout Sculpture Database home">
             <span class="logo-mark" aria-hidden="true"></span>
             <span class="brand-title"><strong>Roundabout</strong><span>Sculpture Database</span></span>
-          </div>
+          </a>
           <nav class="nav" aria-label="Primary navigation">
-            <a class="active" href="#atlas">Atlas</a>
-            <a href="#archive">Archive</a>
-            <a href="https://www.inhiu.com/roundabout-sculpture" target="_blank" rel="noreferrer">Stories</a>
-            <a href="https://www.instagram.com/roundabout_scupture/" target="_blank" rel="noreferrer">Instagram</a>
+            <a href="#atlas" data-route="atlas">Atlas</a>
+            <a href="#archive" data-route="archive">Archive</a>
+            <a href="#collections" data-route="collections">Collections</a>
+            <a href="#about" data-route="about">About</a>
           </nav>
           <div class="top-actions">
-            <button class="icon-button" type="button" aria-label="Search">⌕</button>
+            <a class="icon-button" href="#archive" aria-label="Search archive">⌕</a>
             <button class="sign-in" type="button">Sign in</button>
+            <button id="mobileMenu" class="menu-button" type="button" aria-label="Open menu">☰</button>
           </div>
         </header>
-
-        <div class="layout">
-          <aside class="sidebar" aria-label="Filters">
-            <div class="filters">
-              <div class="filter-head"><h2>Filters</h2><button id="clearFilters" class="clear-button" type="button">Clear all</button></div>
-              <section class="filter-group">
-                <label class="filter-label" for="search">Search</label>
-                <div class="search-wrap">
-                  <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5"></path></svg>
-                  <input id="search" class="search" type="search" placeholder="Search title, country, city..." />
-                </div>
-              </section>
-              <section class="filter-group">
-                <p class="filter-label">Country</p>
-                <select id="countrySelect" class="select" aria-label="Country filter"><option value="all">All countries</option></select>
-              </section>
-              <section class="filter-group">
-                <p class="filter-label">City</p>
-                <select id="citySelect" class="select" aria-label="City filter"><option value="all">All cities</option></select>
-              </section>
-              <section class="filter-group">
-                <p class="filter-label">Editorial mark</p>
-                <div class="mark-grid" aria-label="Editorial mark filters">
-                  <button class="chip active" data-filter="all" type="button">All</button>
-                  <button class="chip" data-filter="featured" type="button">Curious</button>
-                  <button class="chip" data-filter="normal" type="button">Archive</button>
-                  <button class="chip" data-filter="low_priority" type="button">Limited</button>
-                </div>
-              </section>
-            </div>
-            <button id="resultButton" class="result-button" type="button">0 RESULTS</button>
-          </aside>
-
-          <section class="content">
-            <section id="atlas" class="hero">
-              <div class="hero-copy">
-                <div class="atlas-kicker"><span class="target-icon"></span> Global atlas</div>
-                <h1>Roundabout <span>Sculpture</span> Database</h1>
-                <p>The world's most obsessive atlas of traffic-island sculpture: public art, civic pride, and municipal surrealism found at the intersection of movement and place.</p>
-                <div class="stats" aria-label="Archive statistics">
-                  <div class="stat"><strong id="totalCount">0</strong><span>Locations</span></div>
-                  <div class="stat"><strong id="countryCount">0</strong><span>Countries</span></div>
-                  <div class="stat"><strong id="featuredCount">0</strong><span>Highlighted</span></div>
-                  <div class="stat"><strong id="visibleCount">0</strong><span>Visible</span></div>
-                </div>
-              </div>
-              <div class="map-panel">
-                <div id="map" aria-label="Roundabout sculpture map"></div>
-                <div class="map-badge"><span class="pin-dot"></span><span id="mappedCount">0 locations mapped</span></div>
-                <div class="map-legend"><span>Sculptures per region</span><div class="legend-bar"></div><div class="legend-scale"><span>1</span><span>10</span><span>100</span><span>500+</span></div></div>
-              </div>
-            </section>
-
-            <section id="archive" class="archive-section">
-              <div class="section-head">
-                <h2>Archive <span id="archiveCount">— 0 sculptures</span></h2>
-                <div class="view-toggle" aria-label="View toggle"><button class="active" data-view="grid" type="button" aria-pressed="true">Grid</button><button data-view="list" type="button" aria-pressed="false">List</button></div>
-              </div>
-              <div id="cardGrid" class="card-grid" aria-label="Roundabout sculpture cards"></div>
-            </section>
-          </section>
-        </div>
+        <section id="appView" class="view" aria-live="polite"></section>
+        <nav class="mobile-bottom-nav" aria-label="Mobile navigation">
+          <a href="#atlas" data-route="atlas">Atlas</a>
+          <a href="#archive" data-route="archive">Archive</a>
+          <a href="#collections" data-route="collections">Collections</a>
+          <a href="#about" data-route="about">About</a>
+        </nav>
       </main>
     </div>
-
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
     <script src="./data/roundabouts-enriched.js"></script>
     <script src="./app.js"></script>
