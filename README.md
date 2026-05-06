@@ -1,6 +1,6 @@
-# Roundabout Sculpture Archive Public Site
+# Roundabout Sculpture Database Public Site
 
-This folder is the clean publishable version of the Roundabout Sculpture Archive prototype.
+This folder is the clean publishable version of the Roundabout Sculpture Database prototype.
 
 Upload this whole `public-site` folder to a static hosting service such as Netlify or Vercel.
 

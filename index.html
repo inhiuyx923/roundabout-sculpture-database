@@ -16,8 +16,9 @@
         --ink: #1d2526;
         --muted: #66706b;
         --line: #d9ddd7;
-        --paper: #f7f3ea;
+        --paper: #eef1ec;
         --panel: #fffdf8;
+        --soft: #f5efe2;
         --blue: #0288d1;
         --red: #e65100;
         --gray: #757575;
@@ -57,7 +58,7 @@
       }
 
       header {
-        padding: 22px 22px 16px;
+        padding: 24px 22px 18px;
         border-bottom: 1px solid var(--line);
       }
 
@@ -75,16 +76,39 @@
         line-height: 1.5;
       }
 
+      .project-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 14px;
+      }
+
+      .text-link {
+        border: 1px solid var(--line);
+        border-radius: 6px;
+        color: var(--ink);
+        background: #fff;
+        padding: 7px 9px;
+        font-size: 12px;
+        line-height: 1;
+        text-decoration: none;
+      }
+
+      .text-link:hover {
+        border-color: #aab3aa;
+        background: #f8faf6;
+      }
+
       .stats {
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(2, 1fr);
         gap: 1px;
         background: var(--line);
         border-bottom: 1px solid var(--line);
       }
 
       .stat {
-        background: #fffaf0;
+        background: var(--soft);
         padding: 12px;
       }
 
@@ -106,6 +130,19 @@
       .controls {
         padding: 16px;
         border-bottom: 1px solid var(--line);
+      }
+
+      .section-title {
+        margin: 0 0 8px;
+        color: var(--muted);
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .filter-group + .filter-group {
+        margin-top: 14px;
       }
 
       .search {
@@ -177,11 +214,29 @@
         padding: 8px;
       }
 
+      .about {
+        padding: 15px 16px;
+        border-bottom: 1px solid var(--line);
+        background: #fbfaf5;
+      }
+
+      .about p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 13px;
+        line-height: 1.5;
+      }
+
       .country-list {
         display: grid;
         gap: 6px;
-        padding: 8px 8px 4px;
+        padding: 12px 8px 8px;
         border-bottom: 1px solid var(--line);
+      }
+
+      .country-list .section-title {
+        padding: 0 8px;
+        margin-bottom: 2px;
       }
 
       .country-button {
@@ -326,29 +381,46 @@
       <aside>
         <header>
           <h1>Roundabout Sculpture Database</h1>
-          <p class="dek">A working database of hand-collected roundabout sculpture locations.</p>
+          <p class="dek">A photographic typology of sculptures found in traffic roundabouts around the world.</p>
+          <div class="project-links" aria-label="Project links">
+            <a class="text-link" href="https://www.inhiu.com/roundabout-sculpture" target="_blank" rel="noreferrer">Project page</a>
+            <a class="text-link" href="https://www.instagram.com/roundabout_scupture/" target="_blank" rel="noreferrer">Instagram</a>
+          </div>
         </header>
         <section class="stats" aria-label="Archive statistics">
-          <div class="stat"><strong id="totalCount">0</strong><span>Total</span></div>
-          <div class="stat"><strong id="featuredCount">0</strong><span>Featured</span></div>
+          <div class="stat"><strong id="totalCount">0</strong><span>Locations</span></div>
+          <div class="stat"><strong id="countryCount">0</strong><span>Countries</span></div>
+          <div class="stat"><strong id="featuredCount">0</strong><span>Highlighted</span></div>
           <div class="stat"><strong id="visibleCount">0</strong><span>Visible</span></div>
         </section>
         <section class="controls">
-          <input id="search" class="search" type="search" placeholder="Search title, country, city, notes" />
-          <div class="select-row">
-            <select id="countrySelect" class="select" aria-label="Country filter">
-              <option value="all">All countries</option>
-            </select>
-            <select id="citySelect" class="select" aria-label="City filter">
-              <option value="all">All cities</option>
-            </select>
+          <div class="filter-group">
+            <p class="section-title">Search</p>
+            <input id="search" class="search" type="search" placeholder="Search title, country, city, notes" />
           </div>
-          <div class="filter-row" aria-label="Archive filters">
-            <button class="chip active" data-filter="all" type="button">All</button>
-            <button class="chip" data-filter="featured" type="button">Interesting</button>
-            <button class="chip" data-filter="normal" type="button">Ordinary</button>
-            <button class="chip" data-filter="low_priority" type="button">Limited</button>
+          <div class="filter-group">
+            <p class="section-title">Location</p>
+            <div class="select-row">
+              <select id="countrySelect" class="select" aria-label="Country filter">
+                <option value="all">All countries</option>
+              </select>
+              <select id="citySelect" class="select" aria-label="City filter">
+                <option value="all">All cities</option>
+              </select>
+            </div>
           </div>
+          <div class="filter-group">
+            <p class="section-title">Interest</p>
+            <div class="filter-row" aria-label="Archive filters">
+              <button class="chip active" data-filter="all" type="button">All</button>
+              <button class="chip" data-filter="featured" type="button">Interesting</button>
+              <button class="chip" data-filter="normal" type="button">Ordinary</button>
+              <button class="chip" data-filter="low_priority" type="button">Limited</button>
+            </div>
+          </div>
+        </section>
+        <section class="about" aria-label="About the project">
+          <p>This working archive began as a manual street-view hunt during the pandemic. Red points mark especially curious finds; blue points are standard archive records; gray points are limited, difficult, or visually quiet cases.</p>
         </section>
         <section id="countryList" class="country-list" aria-label="Top countries"></section>
         <section id="list" class="list" aria-label="Roundabout sculpture list"></section>
@@ -550,7 +622,7 @@
       function renderTopCountries() {
         const countryList = document.getElementById("countryList");
         const topCountries = countBy(records, "country").slice(0, 8);
-        countryList.innerHTML = topCountries
+        countryList.innerHTML = `<p class="section-title">Top countries</p>` + topCountries
           .map(
             ([country, count]) => `
               <button class="country-button" type="button" data-country="${country}">
@@ -571,6 +643,7 @@
       }
 
       document.getElementById("totalCount").textContent = records.length.toLocaleString();
+      document.getElementById("countryCount").textContent = new Set(records.map((record) => record.country).filter(Boolean)).size.toLocaleString();
       document.getElementById("featuredCount").textContent = records
         .filter((record) => record.interest_level === "featured")
         .length.toLocaleString();
